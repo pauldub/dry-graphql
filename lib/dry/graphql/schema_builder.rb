@@ -27,15 +27,15 @@ module Dry
         @parent = parent
       end
 
-      def with(opts)
-        self.class.new({
+      def with(**opts)
+        self.class.new(
           name: @name, type: @type, schema: @schema, options: @options,
-          parent: self
-        }.merge(opts))
+          parent: self, **opts
+        )
       end
 
-      def reduce_with(*args)
-        with(*args).reduce
+      def reduce_with(**args)
+        with(**args).reduce
       end
 
       def graphql_type

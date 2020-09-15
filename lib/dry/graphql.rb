@@ -14,7 +14,7 @@ module Dry
 
     # Extends Dry::Struct functionality
     module Struct
-      def graphql_type(options = {})
+      def graphql_type(**options)
         return @graphql_type if @graphql_type
 
         graphql_name = Dry::GraphQL.generate_graphql_name(name)
@@ -25,7 +25,7 @@ module Dry
         end
 
         opts = { name: graphql_name, type: schema_hash, schema: graphql_schema, options: options }
-        @graphql_type ||= SchemaBuilder.new(opts).graphql_type
+        @graphql_type ||= SchemaBuilder.new(**opts).graphql_type
       end
     end
 
